@@ -1985,7 +1985,66 @@ a {
   }
 }
 
-@media (max-width: 760px) {
+/* ==========================================================================
+   Mobile Download Floating Action Button
+   ========================================================================== */
+
+.mobile-download-fab {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-download-fab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: fixed;
+    bottom: 22px;
+    right: 20px;
+    background: linear-gradient(135deg, var(--accent) 0%, #aa3f1d 100%);
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: var(--radius-full);
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    box-shadow: 0 6px 20px -2px rgba(196, 81, 45, 0.55), 0 2px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform var(--ease-spring) 0.25s, box-shadow 0.25s ease;
+    user-select: none;
+  }
+
+  .mobile-download-fab:hover {
+    box-shadow: 0 8px 24px -2px rgba(196, 81, 45, 0.65), 0 4px 10px rgba(0, 0, 0, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .mobile-download-fab:active {
+    transform: scale(0.95);
+  }
+
+  .hide-mobile {
+    display: none !important;
+  }
+
+  .header-actions .btn:not(.btn-primary) span {
+    display: none;
+  }
+
+  .header-actions .btn:not(.btn-primary) {
+    padding: 6px 8px;
+  }
+
+  .save-indicator span:not(.dot) {
+    display: none;
+  }
+
+  .save-indicator {
+    padding: 6px 8px;
+  }
+
   .home {
     padding: 20px 16px 48px;
   }
@@ -2005,7 +2064,7 @@ a {
     padding: 0 10px;
   }
   .doc-title-wrap {
-    max-width: 220px;
+    max-width: 180px;
   }
 }
 
@@ -2025,5 +2084,14 @@ a {
   }
   .privacy-pill::after {
     content: 'Local-first';
+  }
+  .doc-title-wrap {
+    max-width: 130px;
+  }
+  .mobile-download-fab {
+    bottom: 16px;
+    right: 16px;
+    padding: 11px 18px;
+    font-size: 13px;
   }
 }

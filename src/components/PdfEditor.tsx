@@ -1979,6 +1979,16 @@ export function PdfEditor({
           </div>
         </div>
       </div>
+      <button
+        type="button"
+        className="mobile-download-fab"
+        onClick={handleDownload}
+        title="Download PDF"
+        aria-label="Download PDF"
+      >
+        <Download size={18} />
+        <span>Download PDF</span>
+      </button>
     </div>
   );
 }

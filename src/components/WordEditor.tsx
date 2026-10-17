@@ -873,6 +873,16 @@ export function WordEditor({
           </div>
         </div>
       </div>
+      <button
+        type="button"
+        className="mobile-download-fab"
+        onClick={doc.kind === 'pdf' ? handleDownloadPdf : handleDownload}
+        title={`Download ${doc.kind === 'pdf' ? 'PDF' : 'DOCX'}`}
+        aria-label={`Download ${doc.kind === 'pdf' ? 'PDF' : 'DOCX'}`}
+      >
+        <Download size={18} />
+        <span>Download {doc.kind === 'pdf' ? 'PDF' : 'DOCX'}</span>
+      </button>
     </div>
   );
 }
