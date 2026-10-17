@@ -41,9 +41,11 @@ import {
   Quote,
   Redo2,
   Strikethrough,
+  Sun,
   Table2,
   Underline as UnderlineIcon,
   Undo2,
+  Moon,
   X,
 } from 'lucide-react';
 import { saveAs } from 'file-saver';
@@ -172,6 +174,25 @@ export function WordEditor({
   const [tableMenu, setTableMenu] = useState(false);
   const [showLegacy, setShowLegacy] = useState(Boolean(doc.legacy));
   const [stats, setStats] = useState({ words: 0, characters: 0 });
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof document !== 'undefined') {
+      const current = document.documentElement.getAttribute('data-theme');
+      if (current === 'light' || current === 'dark') return current;
+      if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+    }
+    return 'light';
+  });
+
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    document.documentElement.setAttribute('data-theme', next);
+    try {
+      localStorage.setItem('papyrus-theme', next);
+    } catch {}
+  };
   const saveTimer = useRef<number | null>(null);
   const latestHtml = useRef(doc.html ?? '');
   const persistRef = useRef(onPersist);
@@ -414,6 +435,15 @@ export function WordEditor({
         </div>
 
         <div className="header-actions">
+          <button
+            type="button"
+            className="icon-btn"
+            onClick={toggleTheme}
+            title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+          </button>
           <span className={`save-indicator ${status === 'saving' ? 'saving' : ''}`}>
             <span className="dot" style={status === 'error' ? { background: '#b03a25' } : undefined} />
             {status === 'saving' ? 'Saving…' : status === 'error' ? 'Not saved' : 'Saved locally'}
